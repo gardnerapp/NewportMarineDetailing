@@ -5,7 +5,7 @@ class Tile extends StatelessWidget{
   final String title;
   final String subTitle;
   final IconData icon;
-  final Function onTap;
+  final Function() onTap;
 
   const Tile({
     super.key,
@@ -22,8 +22,8 @@ class Tile extends StatelessWidget{
       child: Card(
         child: InkWell(
           splashColor: Colors.blueGrey,
-          onTap: (){},
-          child: Container(
+          onTap: onTap,
+          child: SizedBox(
             height: 350,
             child: Column(
               mainAxisSize: MainAxisSize.min,
