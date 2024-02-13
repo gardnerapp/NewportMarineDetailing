@@ -17,7 +17,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColorLight: Colors.greenAccent,
         appBarTheme: const AppBarTheme(
-          elevation: 16.0
+          elevation: 16.0,
+          color: Colors.greenAccent,
+          centerTitle: true,
         ),
         primaryColor: Colors.greenAccent[200],
         visualDensity: VisualDensity.adaptivePlatformDensity,

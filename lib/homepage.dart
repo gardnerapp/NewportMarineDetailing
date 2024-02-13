@@ -8,13 +8,15 @@ class HomePage extends StatelessWidget{
   Widget build(BuildContext context) {
    return Scaffold(
      appBar: AppBar(
+       
        title: const Text("Newport Marine Detailing"),
+       elevation: 16.0,
      ),
      body: ListView(
        padding: const EdgeInsets.all(30.0),
        shrinkWrap: true,
        children:  [
-         Image(image: AssetImage("lib/assets/img/full_logo.png")),
+         const Image(image: AssetImage("lib/assets/img/full_logo.png")),
          // Wash
          Tile(asset: 'lib/assets/img/wash.jpg',
            title: "Daily & Weekly Washes",

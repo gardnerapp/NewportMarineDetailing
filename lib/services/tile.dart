@@ -21,7 +21,7 @@ class Tile extends StatelessWidget{
     return Padding(padding: const EdgeInsets.all(8.0),
       child: Card(
         child: InkWell(
-          splashColor: Colors.blueGrey,
+          splashColor: Colors.greenAccent,
           onTap: onTap,
           child: SizedBox(
             height: 350,
