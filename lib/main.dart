@@ -19,9 +19,14 @@ class MyApp extends StatelessWidget {
         ),
         primaryColor: Colors.greenAccent[200],
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        cardTheme: CardTheme(
+          shadowColor: Colors.blueGrey,
+          elevation: 8.0,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0))
+        )
 
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Test'),
     );
   }
 }
