@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class Tile extends StatelessWidget{
+class ServiceTile extends StatelessWidget{
   final String asset;
   final String title;
   final String subTitle;
   final IconData icon;
   final Function() onTap;
 
-  const Tile({
+  const ServiceTile({
     super.key,
     required this.asset,
     required this.title,
@@ -19,7 +19,7 @@ class Tile extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Padding(padding: const EdgeInsets.all(8.0),
-      child: Card(
+      child: Card( color: Colors.white,
         child: InkWell(
           splashColor: Colors.greenAccent,
           onTap: onTap,
@@ -40,15 +40,22 @@ class Tile extends StatelessWidget{
                 ),
                 ListTile(
                   leading: Icon(icon, size: 30.0, color: Colors.blueGrey[600]),
-                  title: Text(title, style: const TextStyle(fontSize: 22.0),
-                      textAlign: TextAlign.left),
-                  subtitle: Text(subTitle, style: const TextStyle(fontSize: 16.0),
+                  title: Text(title,
+                      style: const TextStyle(
+                          fontSize: 22.0,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black),
+                      textAlign: TextAlign.left,),
+                  subtitle: Text(subTitle,
+                      style: const TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.black),
                       textAlign: TextAlign.left),
                 )
               ],
             ),
           ),
-
         ),
       ),
     );

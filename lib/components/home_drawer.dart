@@ -6,16 +6,18 @@ class HomeDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Drawer(
+    return Drawer(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image(
+          const Image(
             image: AssetImage("lib/assets/img/newport_marine_logo.jpg"),
           ),
-          SizedBox(height: 50.0),
-          Text("Please Report Any Issues to https://newportmarine.app/help")
+          const SizedBox(height: 50.0),
+          Text("Please Report Any Issues to\n",
+              style: Theme.of(context).textTheme.bodyMedium),
+          Text("https://newportmarine.app/help"
+              , style: Theme.of(context).textTheme.bodyMedium)
         ],
       ),
     );
