@@ -44,6 +44,6 @@ class _WashSwitchTileState extends State<WashSwitchTile> {
         )
 
       )
-    )
+    );
   }
 }

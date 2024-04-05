@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:newport_marine/services/wash/wash.dart';
 
-import 'homepage.dart';
+import 'pages/homepage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,6 +16,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Newport Marine Detailing',
       theme: ThemeData(
+        textTheme: const TextTheme(
+          titleLarge: TextStyle(
+            fontSize: 20.0
+          ),
+        ),
         primaryColorLight: Colors.greenAccent,
         appBarTheme: const AppBarTheme(
           elevation: 20.0,
