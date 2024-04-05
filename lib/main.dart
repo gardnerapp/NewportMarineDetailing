@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newport_marine/services/wash/wash.dart';
 
 import 'homepage.dart';
 
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColorLight: Colors.greenAccent,
         appBarTheme: const AppBarTheme(
-          elevation: 16.0,
+          elevation: 20.0,
           color: Colors.greenAccent,
           centerTitle: true,
         ),
@@ -27,9 +28,18 @@ class MyApp extends StatelessWidget {
           shadowColor: Colors.blueGrey,
           elevation: 8.0,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0))
+        ),
+        drawerTheme: const DrawerThemeData(
+          backgroundColor: Colors.white,
+          elevation: 20.0,
+          shadowColor: Colors.blue,
         )
 
       ),
+      routes: {
+        '/': (context) => const HomePage(),
+        '/wash': (context) => const WashPage()
+      },
       home: const HomePage()
     );
   }

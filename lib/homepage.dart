@@ -22,7 +22,7 @@ class HomePage extends StatelessWidget{
            subTitle: "Discount Rates for Weekly & Biweekly plans",
            icon: Icons.update,
            onTap: (){
-            print("Hi");
+
            },
          ),
          // Full Detail
@@ -31,7 +31,7 @@ class HomePage extends StatelessWidget{
            subTitle: "Everything You Need & More !",
            icon: Icons.wb_sunny,
            onTap: (){
-             print("Hi");
+
            },
          ),
          Tile(asset: 'lib/assets/img/dock_side.jpeg',
@@ -39,7 +39,7 @@ class HomePage extends StatelessWidget{
            subTitle: "Arrival/Departure Services & Supply Restock",
            icon: Icons.thumb_up,
            onTap: (){
-             print("Hi");
+
            },
          ),
        ],
