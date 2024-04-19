@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../styles.dart';
 
 class WashPage extends StatefulWidget {
   const WashPage({super.key});
@@ -22,14 +23,14 @@ class _WashPageState extends State<WashPage> {
         padding: const EdgeInsets.all(20.0),
         children: const [
           SizedBox(height: 10),
-         // instructionText("Our washes typically take 2-3 hours\n"),
-        //  instructionText("Discounts for daily, weekly and bi-weekly plans\n"),
-          Divider(height: 20.0, thickness: 2.5, color: Colors.blueGrey),
-          SizedBox(height: 15),
-          Text("Which time and date works for you?",
-         // style: instructionTextStyle(),
-          textAlign: TextAlign.center),
-          SizedBox(height: 15.0,),
+          InstructionText(
+              instruction: "Our washes typically take 2-3 hours.\n"),
+          InstructionText(
+              instruction: "Discounts for daily, weekly and biweekly wash plans !\n"),
+          Divider(height: 10.0, thickness: 2.5, color: Colors.blue),
+          SizedBox(height: 20),
+          InstructionText(instruction: "When would you like your wash?\n"),
+          SizedBox(height: 10.0,),
          // BookAppointmen(),
           SizedBox(height: 25),
           Divider(height: 20.0, thickness: 2.5, color: Colors.blue,),

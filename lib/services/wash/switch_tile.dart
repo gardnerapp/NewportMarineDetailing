@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'wash_styles.dart';
+
+import '../styles.dart';
 
 class WashSwitchTile extends StatefulWidget {
 
