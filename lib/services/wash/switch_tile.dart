@@ -26,6 +26,8 @@ class _SwitchTileState extends State<SwitchTile> {
   Widget build(BuildContext context) {
     return Card(
       child: SwitchListTile(
+        activeColor: Colors.greenAccent,
+        activeTrackColor: Colors.lightBlueAccent,
         title: Text(
           widget.option,
           style: washCardStyle(),

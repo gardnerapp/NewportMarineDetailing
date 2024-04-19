@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:newport_marine/services/appointments/book_appointment.dart';
+import 'package:newport_marine/services/services_reciept.dart';
 import '../styles.dart';
 import 'switch_tile.dart';
 
@@ -106,6 +107,21 @@ class _WashPageState extends State<WashPage> {
               )
           ),
           const SizedBox(height: 30.0),
+          ServicesReceipt(
+              date: selectedDate,
+              time: selectedTime,
+              cost: cost
+          ),
+          const SizedBox(height: 25.0),
+          TextFormField(
+            decoration: textInputDecoration("Anything Else ?"),
+            onChanged: (val){
+              setState(() {
+                additionalInstructions = val;
+              });
+            },
+          ),
+          const SizedBox(height: 25.0),
 
         ],
       ),
