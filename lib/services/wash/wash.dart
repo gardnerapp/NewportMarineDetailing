@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:newport_marine/services/appointments/book_appointment.dart';
 import '../styles.dart';
+import 'switch_tile.dart';
 
 class WashPage extends StatefulWidget {
   const WashPage({super.key});
@@ -38,8 +39,74 @@ class _WashPageState extends State<WashPage> {
           ),
           const SizedBox(height: 25),
           const Divider(height: 20.0, thickness: 2.5, color: Colors.blue,),
-        //  instructionText("Select your options: "),
+          const InstructionText(instruction: "Select your options:\n"),
           const SizedBox(height: 20.0),
+          SwitchTile(
+              option: "Stainless Steel",
+              optionCost: 5.0,
+              handleChange: (bool value) => setState((){
+              double num = 5.0;
+                // calculate price based on boat length
+                // double num widget.user.boat.length * 5.0
+                // if no user on select -> redirect to create profile
+                if (value) {
+                  cost += num;
+                  services["Stainless Steel"] = num;
+                } else { // if they go from yes to no this will run
+                  cost = cost - num;
+                  services.remove("Stainless Steel");
+                }}
+              )
+          ),
+          const SizedBox(height: 10.0),
+          SwitchTile(
+              option: "Glass Polishing",
+              optionCost: 3.0,
+              handleChange: (bool value) => setState((){
+                double num = 3.0;
+                // calculate price based on boat length
+                // double num widget.user.boat.length * 5.0
+                // if no user on select -> redirect to create profile
+                if (value) {
+                  cost += num;
+                  services["Glass Polishing"] = num;
+                } else { // if they go from yes to no this will run
+                  cost = cost - num;
+                  services.remove("Glass Polishing");
+                }}
+              )
+          ),
+          const SizedBox(height: 10.0),
+          SwitchTile(
+              option: "Cabin Maid",
+              optionCost: 16.0,
+              handleChange: (bool value) => setState((){
+                double num = 16.0;
+               // no cost based on boat len for this one
+
+                // if no user on select -> redirect to create profile
+                if (value) {
+                  cost += num;
+                  services["Cabin Maid"] = num;
+                } else { // if they go from yes to no this will run
+                  cost = cost - num;
+                  services.remove("Cabin Maid");
+                }}
+              )
+          ),
+          const SizedBox(height: 10),
+          SwitchTile(
+              option: "Free Compartment Cleaning !",
+              optionCost: 0.0,
+              handleChange: (bool value) => setState((){
+                if (value) {
+                  services["Compartment Cleaning"] = 0.0;
+                } else { // if they go from yes to no this will run
+                  services.remove("Compartment Cleaning");
+                }}
+              )
+          ),
+          const SizedBox(height: 30.0),
 
         ],
       ),

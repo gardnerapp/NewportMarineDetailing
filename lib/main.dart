@@ -3,6 +3,8 @@ import 'package:newport_marine/services/wash/wash.dart';
 
 import 'pages/homepage.dart';
 
+//Todo double check prices on every pages
+
 void main() {
   runApp(const MyApp());
 }
