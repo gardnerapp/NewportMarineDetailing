@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newport_marine/services/appointments/book_appointment.dart';
 import '../styles.dart';
 
 class WashPage extends StatefulWidget {
@@ -10,7 +11,7 @@ class WashPage extends StatefulWidget {
 
 class _WashPageState extends State<WashPage> {
   DateTime selectedDate = DateTime.now();
-  TimeOfDay selectedTIme = const TimeOfDay(hour: 07, minute: 00);
+  TimeOfDay selectedTime = const TimeOfDay(hour: 07, minute: 00);
   late double cost; // cost per foot * boat length what does late do
   late String additionalInstructions;
   Map<String,double> services = {};
@@ -21,21 +22,24 @@ class _WashPageState extends State<WashPage> {
       appBar: AppBar(title: const Text("Wash")),
       body: ListView(
         padding: const EdgeInsets.all(20.0),
-        children: const [
-          SizedBox(height: 10),
-          InstructionText(
+        children: [
+          const SizedBox(height: 10),
+          const InstructionText(
               instruction: "Our washes typically take 2-3 hours.\n"),
-          InstructionText(
+          const InstructionText(
               instruction: "Discounts for daily, weekly and biweekly wash plans !\n"),
-          Divider(height: 10.0, thickness: 2.5, color: Colors.blue),
-          SizedBox(height: 20),
-          InstructionText(instruction: "When would you like your wash?\n"),
-          SizedBox(height: 10.0,),
-         // BookAppointmen(),
-          SizedBox(height: 25),
-          Divider(height: 20.0, thickness: 2.5, color: Colors.blue,),
+          const Divider(height: 10.0, thickness: 2.5, color: Colors.blue),
+          const SizedBox(height: 20),
+          const InstructionText(instruction: "When would you like your wash?\n"),
+          const SizedBox(height: 10.0,),
+          BookAppointment(
+              handleDateChange: (DateTime date) => setState(() => selectedDate = date),
+              handleTImeChange: (TimeOfDay time) => setState(() => selectedTime = time),
+          ),
+          const SizedBox(height: 25),
+          const Divider(height: 20.0, thickness: 2.5, color: Colors.blue,),
         //  instructionText("Select your options: "),
-          SizedBox(height: 20.0),
+          const SizedBox(height: 20.0),
 
         ],
       ),

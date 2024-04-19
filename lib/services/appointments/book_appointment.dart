@@ -25,14 +25,16 @@ class _BookAppointmentState extends State<BookAppointment> {
       children: [
         BookingFloatingAction(
             onPressed: () async {
-              // TODO impliment callbacks to top level
+              await _selectDate(context);
+              widget.handleDateChange(selectedDate);
             },
             iconData: Icons.calendar_today,
             heroTag: 'Date'
         ),
         BookingFloatingAction(
             onPressed: () async {
-              // TODO impliment callbacks to top level
+              await _selectTime(context);
+              widget.handleTImeChange(selectedTime);
             },
             iconData: Icons.timer,
             heroTag: 'Time'
@@ -52,10 +54,12 @@ class _BookAppointmentState extends State<BookAppointment> {
       helpText: "Please set a date for your appointment.",
       errorFormatText: "Enter a valid date",
       errorInvalidText: "Enter a valid date",
-      builder: (context, child) {
-        return Theme(
-          data: ThemeData.dark(),
-          child: SizedBox(),
+      builder: (context,child) {
+        return DatePickerDialog(
+            firstDate: DateTime.now(),
+            lastDate: DateTime(
+            2500, DateTime.september, 01
+        )
         );
       }
     );
