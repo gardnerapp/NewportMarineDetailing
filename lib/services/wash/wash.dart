@@ -9,7 +9,7 @@ class WashPage extends StatefulWidget {
 
 class _WashPageState extends State<WashPage> {
   DateTime selectedDate = DateTime.now();
-  TimeOfDay selectedTIme = TimeOfDay(hour: 07, minute: 00);
+  TimeOfDay selectedTIme = const TimeOfDay(hour: 07, minute: 00);
   late double cost; // cost per foot * boat length what does late do
   late String additionalInstructions;
   Map<String,double> services = {};
