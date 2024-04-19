@@ -14,9 +14,7 @@ class ServicesReceipt extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 100,
-      child: Card(
+    return Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
         ),
@@ -26,10 +24,10 @@ class ServicesReceipt extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             const InstructionText(
-                instruction: "My appointment:\n"
+                instruction: "My appointment:"
             ),
             InstructionText(
-                instruction: "${date.month}/${date.day} @ ${time.hour}:${time.minute}\n"
+                instruction: "${date.month}/${date.day} @ ${time.hour}:${time.minute}"
             ),
             InstructionText(
                 instruction: "Total: \$$cost"
@@ -37,7 +35,6 @@ class ServicesReceipt extends StatelessWidget {
           ],
         ),
 
-      ),
-    );
+      );
   }
 }
