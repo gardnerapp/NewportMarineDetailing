@@ -24,7 +24,7 @@ class _SwitchTileState extends State<SwitchTile> {
 
   @override
   Widget build(BuildContext context) {
-    return Card( // todo gloablly style cards
+    return Card(
       child: SwitchListTile(
         title: Text(
           widget.option,

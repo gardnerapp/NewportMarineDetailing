@@ -13,7 +13,7 @@ class WashPage extends StatefulWidget {
 class _WashPageState extends State<WashPage> {
   DateTime selectedDate = DateTime.now();
   TimeOfDay selectedTime = const TimeOfDay(hour: 07, minute: 00);
-  late double cost; // cost per foot * boat length what does late do
+  double cost = 0.0; // cost per foot * boat length what does late do
   late String additionalInstructions;
   Map<String,double> services = {};
 
@@ -40,7 +40,7 @@ class _WashPageState extends State<WashPage> {
           const SizedBox(height: 25),
           const Divider(height: 20.0, thickness: 2.5, color: Colors.blue,),
           const InstructionText(instruction: "Select your options:\n"),
-          const SizedBox(height: 20.0),
+          const SizedBox(height: 10.0),
           SwitchTile(
               option: "Stainless Steel",
               optionCost: 5.0,
@@ -53,7 +53,6 @@ class _WashPageState extends State<WashPage> {
                   cost += num;
                   services["Stainless Steel"] = num;
                 } else { // if they go from yes to no this will run
-                  cost = cost - num;
                   services.remove("Stainless Steel");
                 }}
               )
