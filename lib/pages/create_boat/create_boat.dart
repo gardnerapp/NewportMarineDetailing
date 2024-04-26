@@ -22,6 +22,8 @@ class _CreateBoatState extends State<CreateBoat> {
   late String email;
   late String phone;
 
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,6 +31,7 @@ class _CreateBoatState extends State<CreateBoat> {
       body: Container(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25.0),
         child: Form(
+            key: _formKey,
             child: ListView(
               padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
               children:[
@@ -96,12 +99,19 @@ class _CreateBoatState extends State<CreateBoat> {
                         location = val;
                       });
                     }),
-                FormSubmitBtn(label: "Get Started !",
-                    onPressed: (){},
-                    icon: const Icon(
-                      Icons.directions_boat,
-                      size: 40.0,
-                      color: Colors.lightBlueAccent,),
+                FormSubmitBtn(
+                  label: "Get Started !",
+                  icon: const Icon(
+                    Icons.directions_boat,
+                    size: 40.0,
+                    color: Colors.lightBlueAccent,),
+                    onPressed: (){
+                      if(_formKey.currentState!.validate()){
+                        print("Valid");
+                      }else{
+                        print(_formKey.currentState!.validate());
+                      }
+                    },
                 ),
               ]
             )),

@@ -7,7 +7,7 @@ class BoatTextForm extends StatelessWidget {
   const BoatTextForm({
     super.key,
     required this.label,
-    required this.onChanged
+    required this.onChanged,
   });
 
   @override
@@ -23,7 +23,13 @@ class BoatTextForm extends StatelessWidget {
         onChanged: (val){
           onChanged(val);
         },
-        validator: (val) => val != null? "Please enter !" : null,
+        validator: (val){
+          if (val == null || val.isEmpty){
+            return "Please Enter Some Text.\n";
+          }else{
+            return null;
+          }
+        },
       ),
     );
   }
