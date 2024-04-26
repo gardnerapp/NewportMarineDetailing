@@ -4,6 +4,10 @@ import 'package:newport_marine/services/services_reciept.dart';
 import '../styles.dart';
 import 'switch_tile.dart';
 
+// TODO add button at bottom of wash, map to wash confirmation page
+// Add exceptions for when user isn't logged in
+// Route them to create boat page, save in creds
+
 class WashPage extends StatefulWidget {
   const WashPage({super.key});
 
