@@ -5,6 +5,8 @@ import 'package:newport_marine/services/wash/wash.dart';
 import 'pages/homepage.dart';
 
 //Todo double check prices on every pages
+// TODO add button for submitting form, save locally on the phone
+
 
 void main() {
   runApp(const MyApp());
@@ -37,6 +39,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
         appBarTheme: const AppBarTheme(
+          color: Colors.white,
           actionsIconTheme: appBarIconTheme,
           iconTheme: appBarIconTheme,
           elevation: 16.0,

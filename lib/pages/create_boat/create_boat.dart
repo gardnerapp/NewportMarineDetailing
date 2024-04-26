@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:newport_marine/components/customAppBar.dart';
+import 'package:newport_marine/components/form_submit_btn.dart';
 
 import 'boat_text_form.dart';
 
@@ -95,6 +96,13 @@ class _CreateBoatState extends State<CreateBoat> {
                         location = val;
                       });
                     }),
+                FormSubmitBtn(label: "Get Started !",
+                    onPressed: (){},
+                    icon: const Icon(
+                      Icons.directions_boat,
+                      size: 40.0,
+                      color: Colors.lightBlueAccent,),
+                ),
               ]
             )),
       ),
