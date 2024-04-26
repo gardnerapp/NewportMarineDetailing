@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:newport_marine/components/form_submit_btn.dart';
 import 'package:newport_marine/services/appointments/book_appointment.dart';
 import 'package:newport_marine/services/services_reciept.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../styles.dart';
 import 'switch_tile.dart';
 
-// TODO add button at bottom of wash, map to wash confirmation page
-// Add exceptions for when user isn't logged in
-// Route them to create boat page, save in creds
+// OnSubmit to map to wash confirmation page
 
 class WashPage extends StatefulWidget {
   const WashPage({super.key});
@@ -126,7 +126,16 @@ class _WashPageState extends State<WashPage> {
             },
           ),
           const SizedBox(height: 25.0),
-
+          FormSubmitBtn(
+              label: "Book Wash",
+              icon: const Icon(
+                Icons.directions_boat,
+                size: 40.0,
+                color: Colors.lightBlueAccent),
+              onPressed: () async {
+                final SharedPreferences prefs = await SharedPreferences.getInstance();
+                var boat_length = prefs.getDouble('nm_boat_length');
+              } )
         ],
       ),
     );

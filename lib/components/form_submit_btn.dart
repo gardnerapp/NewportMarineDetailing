@@ -8,8 +8,9 @@ class FormSubmitBtn extends StatelessWidget {
   const FormSubmitBtn({
     super.key,
     required this.label,
-    required this.onPressed,
-    required this.icon});
+    required this.icon,
+    required this.onPressed
+  });
 
   @override
   Widget build(BuildContext context) {

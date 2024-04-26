@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:newport_marine/components/customAppBar.dart';
 import 'package:newport_marine/components/form_submit_btn.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'boat_text_form.dart';
 
@@ -105,11 +106,38 @@ class _CreateBoatState extends State<CreateBoat> {
                     Icons.directions_boat,
                     size: 40.0,
                     color: Colors.lightBlueAccent,),
-                    onPressed: (){
+                    onPressed: () async {
                       if(_formKey.currentState!.validate()){
-                        print("Valid");
+                        // Store data on disc
+                        final prefs = await SharedPreferences.getInstance();
+
+                        // save boat
+                        await prefs.setString('nm_boat_name', boatName);
+                        await prefs.setString('nm_boat_location', location);
+                        await prefs.setDouble('nm_boat_length', length);
+
+                        // save user data
+                        await prefs.setString('nm_user_name', userName);
+                        await prefs.setString('nm_user_phone', phone);
+                        await prefs.setString('nm_user_email', email);
+
+                        // Push to the homepage and notify user
+                        Navigator.pushNamed(context, '/');
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                              backgroundColor: Colors.white,
+                              elevation: 20.0,
+                              padding: EdgeInsets.all(20.0),
+                              content: Text(
+                                'Congrats, you can get started ! ',
+                                style: TextStyle(
+                                    fontSize: 30.0,
+                                    color: Colors.black87)
+                              )
+                          ),
+                        );
                       }else{
-                        print(_formKey.currentState!.validate());
+
                       }
                     },
                 ),
