@@ -10,7 +10,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const HomeDrawer(),
-      appBar: customAppBar("Newport Marine"),
+      appBar: customAppBar("Newport Marine", context),
       body: ListView(
         padding: const EdgeInsets.all(30.0),
         shrinkWrap: true,

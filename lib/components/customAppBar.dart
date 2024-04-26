@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 
-AppBar customAppBar(String title){
+AppBar customAppBar(String title, context){
   return AppBar(
     actions: [
       IconButton(
@@ -10,7 +10,9 @@ AppBar customAppBar(String title){
             color: Colors.blue
         ),
         splashColor: Colors.greenAccent,
-        onPressed: (){},
+        onPressed: (){
+          Navigator.pushNamed(context, '/create_boat');
+        },
       )
     ],
     title: Text(title),

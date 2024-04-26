@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newport_marine/pages/create_boat/create_boat.dart';
 import 'package:newport_marine/services/wash/wash.dart';
 
 import 'pages/homepage.dart';
@@ -65,7 +66,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const HomePage(),
-        '/wash': (context) => const WashPage()
+        '/wash': (context) => const WashPage(),
+        '/create_boat': (context) => const CreateBoat(),
       },
 
     );
