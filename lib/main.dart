@@ -12,9 +12,16 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    // Reusable appbar Icon Themes
+    const appBarIconTheme =  IconThemeData(
+        size: 30.0,
+        color: Colors.blue
+    );
+
     return MaterialApp(
       title: 'Newport Marine Detailing',
       theme: ThemeData(
@@ -29,11 +36,10 @@ class MyApp extends StatelessWidget {
           ),
         ),
         appBarTheme: const AppBarTheme(
-          iconTheme: IconThemeData(
-            size: 30.0
-          ),
+          actionsIconTheme: appBarIconTheme,
+          iconTheme: appBarIconTheme,
           elevation: 16.0,
-          shadowColor: Colors.blueAccent,
+          shadowColor: Colors.greenAccent,
           centerTitle: true,
           titleTextStyle: TextStyle(
             fontSize: 25.0,
