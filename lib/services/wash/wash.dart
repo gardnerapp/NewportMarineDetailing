@@ -1,5 +1,8 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:newport_marine/components/form_submit_btn.dart';
+import 'package:newport_marine/models/boat.dart';
 import 'package:newport_marine/services/appointments/book_appointment.dart';
 import 'package:newport_marine/services/services_reciept.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -7,6 +10,7 @@ import '../styles.dart';
 import 'switch_tile.dart';
 
 // OnSubmit to map to wash confirmation page
+// todo dynamic cost
 
 class WashPage extends StatefulWidget {
   const WashPage({super.key});
@@ -23,7 +27,13 @@ class _WashPageState extends State<WashPage> {
   Map<String,double> services = {};
 
   @override
+  Future<void> initState() async {
+
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
+   
     return  Scaffold(
       appBar: AppBar(title: const Text("Wash")),
       body: ListView(
@@ -49,6 +59,7 @@ class _WashPageState extends State<WashPage> {
               option: "Stainless Steel",
               optionCost: 5.0,
               handleChange: (bool value) => setState((){
+                print(boat.length);
               double num = 5.0;
                 // calculate price based on boat length
                 // double num widget.user.boat.length * 5.0
@@ -133,11 +144,33 @@ class _WashPageState extends State<WashPage> {
                 size: 40.0,
                 color: Colors.lightBlueAccent),
               onPressed: () async {
-                final SharedPreferences prefs = await SharedPreferences.getInstance();
-                var boat_length = prefs.getDouble('nm_boat_length');
+
               } )
         ],
       ),
+    );
+  }
+  Future<Boat> getBoat() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    // retrieve and map preferences
+    Map<String,dynamic> boatMap = {};
+
+    boatMap['boatName'] = prefs.getString('nm_boat_name');
+    boatMap['location'] = prefs.getString('nm_boat_location');
+    boatMap['length'] = prefs.getDouble('nm_boat_length');
+
+    boatMap['userName'] = prefs.getString('nm_user_name');
+    boatMap['phone'] = prefs.getString('nm_user_phone');
+    boatMap['email'] = prefs.getString('nm_user_email');
+
+    return Boat(
+      boatName: boatMap['boatName'],
+      location: boatMap['location'],
+      length: boatMap['length'],
+      userName: boatMap['userName'],
+      phone: boatMap['phone'],
+      email: boatMap['email']
     );
   }
 }
