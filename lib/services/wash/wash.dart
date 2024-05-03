@@ -24,7 +24,7 @@ class _WashPageState extends State<WashPage> {
   DateTime selectedDate = DateTime.now();
   TimeOfDay selectedTime = const TimeOfDay(hour: 07, minute: 00);
   double cost = 0.0; // cost per foot * boat length what does late do
-  late String additionalInstructions;
+  late String additionalInstructions = '';
   Map<String,double> services = {};
 
   @override
@@ -154,6 +154,7 @@ class _WashPageState extends State<WashPage> {
                 // make sure there is a boat
                 var length = await getLength();
                 checkLength(length);
+
                 if(cost != 0.0){
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) =>

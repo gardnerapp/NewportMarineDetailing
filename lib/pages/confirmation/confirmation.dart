@@ -27,7 +27,10 @@ class Confirmation extends StatelessWidget {
 
     return Scaffold(
       appBar: customAppBar("Thank You !", context),
-      body: const ConfirmationCard(children: [],),
+      body: const ConfirmationCard(
+          children: [
+
+      ]),
     );
   }
 }
