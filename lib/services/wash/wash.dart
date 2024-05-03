@@ -2,16 +2,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:newport_marine/components/form_submit_btn.dart';
-
+import 'package:newport_marine/pages/confirmation/confirmation.dart';
 import 'package:newport_marine/services/appointments/book_appointment.dart';
 import 'package:newport_marine/services/services_reciept.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../styles.dart';
 import 'switch_tile.dart';
 
-// OnSubmit to map to wash confirmation page
-// todo dynamic cost
-// what do boat attributes look like when There is not boat
+// todo OnSubmit to map to wash confirmation page
+// todo make sure they can't submit blank date !!
+// todo api call b4 push to confirm
 
 class WashPage extends StatefulWidget {
   const WashPage({super.key});
@@ -67,7 +67,6 @@ class _WashPageState extends State<WashPage> {
                   // double num widget.user.boat.length * 5.0
                   // if no user on select -> redirect to create profile
                   if (value) {
-
                     cost += num;
                     services["Stainless Steel"] = num;
                   } else { // if they go from yes to no this will run
@@ -85,16 +84,14 @@ class _WashPageState extends State<WashPage> {
                 //get length push to create boat if doesn't exit
                 var length = await getLength();
                 checkLength(length);
+
                 setState(() {
                   double num = 3.0 * length;
-                  // calculate price based on boat length
-                  // double num widget.user.boat.length * 5.0
-                  // if no user on select -> redirect to create profile
                   if (value) {
                     cost += num;
                     services["Glass Polishing"] = num;
                   } else { // if they go from yes to no this will run
-                    cost = cost - num;
+                    cost -= num;
                     services.remove("Glass Polishing");
                   }
                 }
@@ -154,7 +151,21 @@ class _WashPageState extends State<WashPage> {
                 size: 40.0,
                 color: Colors.lightBlueAccent),
               onPressed: () async {
-
+                // make sure there is a boat
+                var length = await getLength();
+                checkLength(length);
+                if(cost != 0.0){
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) =>
+                          Confirmation(
+                            serviceName: 'Wash',
+                            services: services,
+                            date: selectedDate,
+                            time: selectedTime,
+                            cost: cost,
+                            additionalInstructions: additionalInstructions,
+                            )));
+                }
               } )
         ],
       ),
@@ -171,7 +182,6 @@ class _WashPageState extends State<WashPage> {
   }
 
   checkLength(dynamic length){
-    print(length);
     if(length == null){
       Navigator.pushNamed(context, '/create_boat');
     }
