@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:newport_marine/components/form_submit_btn.dart';
-import 'package:newport_marine/models/boat.dart';
+
 import 'package:newport_marine/services/appointments/book_appointment.dart';
 import 'package:newport_marine/services/services_reciept.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -11,6 +11,7 @@ import 'switch_tile.dart';
 
 // OnSubmit to map to wash confirmation page
 // todo dynamic cost
+// what do boat attributes look like when There is not boat
 
 class WashPage extends StatefulWidget {
   const WashPage({super.key});
@@ -27,13 +28,8 @@ class _WashPageState extends State<WashPage> {
   Map<String,double> services = {};
 
   @override
-  Future<void> initState() async {
-
-    super.initState();
-  }
-  @override
   Widget build(BuildContext context) {
-   
+
     return  Scaffold(
       appBar: AppBar(title: const Text("Wash")),
       body: ListView(
@@ -58,38 +54,52 @@ class _WashPageState extends State<WashPage> {
           SwitchTile(
               option: "Stainless Steel",
               optionCost: 5.0,
-              handleChange: (bool value) => setState((){
-                print(boat.length);
-              double num = 5.0;
-                // calculate price based on boat length
-                // double num widget.user.boat.length * 5.0
-                // if no user on select -> redirect to create profile
-                if (value) {
-                  cost += num;
-                  services["Stainless Steel"] = num;
-                } else { // if they go from yes to no this will run
-                  cost -= num;
-                  services.remove("Stainless Steel");
-                }}
-              )
+              handleChange: (bool value) async {
+                //get length push to create boat if doesn't exit
+                var length = await getLength();
+                checkLength(length);
+
+                setState((){
+
+                  var num = length * 5.0;
+
+                  // calculate price based on boat length
+                  // double num widget.user.boat.length * 5.0
+                  // if no user on select -> redirect to create profile
+                  if (value) {
+
+                    cost += num;
+                    services["Stainless Steel"] = num;
+                  } else { // if they go from yes to no this will run
+                    cost -= num;
+                    services.remove("Stainless Steel");
+                  }}
+              );
+              }
           ),
           const SizedBox(height: 10.0),
           SwitchTile(
               option: "Glass Polishing",
               optionCost: 3.0,
-              handleChange: (bool value) => setState((){
-                double num = 3.0;
-                // calculate price based on boat length
-                // double num widget.user.boat.length * 5.0
-                // if no user on select -> redirect to create profile
-                if (value) {
-                  cost += num;
-                  services["Glass Polishing"] = num;
-                } else { // if they go from yes to no this will run
-                  cost = cost - num;
-                  services.remove("Glass Polishing");
-                }}
-              )
+              handleChange: (bool value) async {
+                //get length push to create boat if doesn't exit
+                var length = await getLength();
+                checkLength(length);
+                setState(() {
+                  double num = 3.0 * length;
+                  // calculate price based on boat length
+                  // double num widget.user.boat.length * 5.0
+                  // if no user on select -> redirect to create profile
+                  if (value) {
+                    cost += num;
+                    services["Glass Polishing"] = num;
+                  } else { // if they go from yes to no this will run
+                    cost = cost - num;
+                    services.remove("Glass Polishing");
+                  }
+                }
+                );
+              }
           ),
           const SizedBox(height: 10.0),
           SwitchTile(
@@ -150,27 +160,20 @@ class _WashPageState extends State<WashPage> {
       ),
     );
   }
-  Future<Boat> getBoat() async {
+
+   getLength() async {
     final prefs = await SharedPreferences.getInstance();
 
-    // retrieve and map preferences
-    Map<String,dynamic> boatMap = {};
+    double? length = prefs.getDouble('nm_boat_length');
 
-    boatMap['boatName'] = prefs.getString('nm_boat_name');
-    boatMap['location'] = prefs.getString('nm_boat_location');
-    boatMap['length'] = prefs.getDouble('nm_boat_length');
+    length = prefs.getDouble('nm_boat_length');
+    return length;
+  }
 
-    boatMap['userName'] = prefs.getString('nm_user_name');
-    boatMap['phone'] = prefs.getString('nm_user_phone');
-    boatMap['email'] = prefs.getString('nm_user_email');
-
-    return Boat(
-      boatName: boatMap['boatName'],
-      location: boatMap['location'],
-      length: boatMap['length'],
-      userName: boatMap['userName'],
-      phone: boatMap['phone'],
-      email: boatMap['email']
-    );
+  checkLength(dynamic length){
+    print(length);
+    if(length == null){
+      Navigator.pushNamed(context, '/create_boat');
+    }
   }
 }
