@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:newport_marine/components/customAppBar.dart';
 import 'package:newport_marine/pages/confirmation/confirmation_card.dart';
 
@@ -24,27 +25,32 @@ class Confirmation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var appointmentTime = "${date.month}/${date.day} @";
-
+    var appointmentTime = DateFormat('MM-dd-yyyy @ kk:mm a').format(date);
+    
     return Scaffold(
       appBar: customAppBar("Thank You !", context),
       body: ConfirmationCard(
           children: [
             const SizedBox(height: 20),
             Text(
-              "Thank you ${boatDetails['user_name']} choosing Newport Marine Detailing ! ",
+              "Thank you ${boatDetails['user_name']} choosing Newport Marine Detailing !\n ",
               style: washCardStyle(),
-              textAlign: TextAlign.center
+              textAlign: TextAlign.left
             ),
-            const SizedBox(height: 20),
+         //   const SizedBox(height: 20),
             Text(
-                "A $serviceName has been booked for $appointmentTime ",
+                "A $serviceName has been booked for ${boatDetails['boat_name']} "
+                    "at ${boatDetails['boat_location']} for $appointmentTime\n ",
                 style: washCardStyle(),
-                textAlign: TextAlign.center
+                textAlign: TextAlign.left
             ),
-
-
-      ]),
+            Text(
+                "Total \$ $cost\n",
+                style: washCardStyle(),
+                textAlign: TextAlign.left
+            ),
+      ]
+      ),
     );
   }
 }
