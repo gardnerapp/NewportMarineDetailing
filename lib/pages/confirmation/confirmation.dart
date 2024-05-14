@@ -9,6 +9,7 @@ class Confirmation extends StatelessWidget {
   final double cost;
   final String additionalInstructions;
   final Map<String,dynamic> services;
+  final Map<String, dynamic> boatDetails;
 
   const Confirmation({
     super.key,
@@ -17,7 +18,8 @@ class Confirmation extends StatelessWidget {
     required this.time,
     required this.cost,
     required this.additionalInstructions,
-    required this.services
+    required this.services,
+    required this.boatDetails,
   });
 
   @override

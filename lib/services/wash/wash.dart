@@ -9,9 +9,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../styles.dart';
 import 'switch_tile.dart';
 
-// todo OnSubmit to map to wash confirmation page
-// todo make sure they can't submit blank date !!
 // todo api call b4 push to confirm
+// todo make confirmation page look nice !
 
 class WashPage extends StatefulWidget {
   const WashPage({super.key});
@@ -26,10 +25,11 @@ class _WashPageState extends State<WashPage> {
   double cost = 0.0; // cost per foot * boat length what does late do
   late String additionalInstructions = '';
   Map<String,double> services = {};
+  Map<String,dynamic> boatDetails = {};
 
   @override
   Widget build(BuildContext context) {
-
+    getBoat();
     return  Scaffold(
       appBar: AppBar(title: const Text("Wash")),
       body: ListView(
@@ -56,24 +56,25 @@ class _WashPageState extends State<WashPage> {
               optionCost: 5.0,
               handleChange: (bool value) async {
                 //get length push to create boat if doesn't exit
-                var length = await getLength();
-                checkLength(length);
+                if(boatDetails.containsValue(null)){
+                  Navigator.pushNamed(context, '/create_boat');
+                }else{
+                  setState((){
 
-                setState((){
+                    var num = boatDetails['length'] * 5.0;
 
-                  var num = length * 5.0;
-
-                  // calculate price based on boat length
-                  // double num widget.user.boat.length * 5.0
-                  // if no user on select -> redirect to create profile
-                  if (value) {
-                    cost += num;
-                    services["Stainless Steel"] = num;
-                  } else { // if they go from yes to no this will run
-                    cost -= num;
-                    services.remove("Stainless Steel");
-                  }}
-              );
+                    // calculate price based on boat length
+                    // double num widget.user.boat.length * 5.0
+                    // if no user on select -> redirect to create profile
+                    if (value) {
+                      cost += num;
+                      services["Stainless Steel"] = num;
+                    } else { // if they go from yes to no this will run
+                      cost -= num;
+                      services.remove("Stainless Steel");
+                    }}
+                  );
+                }
               }
           ),
           const SizedBox(height: 10.0),
@@ -81,21 +82,21 @@ class _WashPageState extends State<WashPage> {
               option: "Glass Polishing",
               optionCost: 3.0,
               handleChange: (bool value) async {
-                //get length push to create boat if doesn't exit
-                var length = await getLength();
-                checkLength(length);
-
-                setState(() {
-                  double num = 3.0 * length;
-                  if (value) {
-                    cost += num;
-                    services["Glass Polishing"] = num;
-                  } else { // if they go from yes to no this will run
-                    cost -= num;
-                    services.remove("Glass Polishing");
+                if (boatDetails.containsValue(null)) {
+                  Navigator.pushNamed(context, '/create_boat');
+                } else {
+                  setState(() {
+                    double num = 3.0 * boatDetails['length'];
+                    if (value) {
+                      cost += num;
+                      services["Glass Polishing"] = num;
+                    } else { // if they go from yes to no this will run
+                      cost -= num;
+                      services.remove("Glass Polishing");
+                    }
                   }
+                  );
                 }
-                );
               }
           ),
           const SizedBox(height: 10.0),
@@ -150,22 +151,24 @@ class _WashPageState extends State<WashPage> {
                 Icons.directions_boat,
                 size: 40.0,
                 color: Colors.lightBlueAccent),
-              onPressed: () async {
+              onPressed: () {
                 // make sure there is a boat
-                var length = await getLength();
-                checkLength(length);
-
-                if(cost != 0.0){
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) =>
-                          Confirmation(
-                            serviceName: 'Wash',
-                            services: services,
-                            date: selectedDate,
-                            time: selectedTime,
-                            cost: cost,
-                            additionalInstructions: additionalInstructions,
+                if(boatDetails.containsValue(null)){
+                    Navigator.pushNamed(context, '/create_boat');
+                }else {
+                  if (cost != 0.0) {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) =>
+                            Confirmation(
+                              serviceName: 'Wash',
+                              services: services,
+                              date: selectedDate,
+                              time: selectedTime,
+                              cost: cost,
+                              additionalInstructions: additionalInstructions,
+                              boatDetails: boatDetails,
                             )));
+                  }
                 }
               } )
         ],
@@ -173,18 +176,17 @@ class _WashPageState extends State<WashPage> {
     );
   }
 
-   getLength() async {
+   getBoat() async {
+    // boat length, boat name, location, user name
     final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      boatDetails['length'] = prefs.getDouble('nm_boat_length');
+      boatDetails['boat_name'] = prefs.getString('nm_boat_name');
+      boatDetails['boat_location'] = prefs.getString('nm_boat_location');
 
-    double? length = prefs.getDouble('nm_boat_length');
-
-    length = prefs.getDouble('nm_boat_length');
-    return length;
-  }
-
-  checkLength(dynamic length){
-    if(length == null){
-      Navigator.pushNamed(context, '/create_boat');
-    }
+      boatDetails['user_name'] = prefs.getString('nm_user_name');
+      boatDetails['user_phone'] = prefs.getString('nm_user_phone');
+      boatDetails['user_email'] = prefs.getString('nm_user_email');
+    });
   }
 }

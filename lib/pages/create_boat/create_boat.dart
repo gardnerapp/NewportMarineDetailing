@@ -122,7 +122,7 @@ class _CreateBoatState extends State<CreateBoat> {
                         await prefs.setString('nm_user_email', email);
 
                         // Push to the homepage and notify user
-                        Navigator.pop(context);
+                        Navigator.pushNamed(context, '/');
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                               backgroundColor: Colors.white,
