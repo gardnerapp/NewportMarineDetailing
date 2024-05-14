@@ -14,6 +14,7 @@ class ConfirmationCard extends StatelessWidget {
         padding: const EdgeInsets.all(25.0),
         child: Card(
           child: ListView(
+            padding: const EdgeInsets.all(25.0),
             shrinkWrap: true,
             children: children,
           ),

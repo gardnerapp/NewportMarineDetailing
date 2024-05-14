@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:newport_marine/services/styles.dart';
 
 class ServicesReceipt extends StatelessWidget {
   final DateTime date;
-  final TimeOfDay time;
   final double cost;
 
   const ServicesReceipt({
     super.key,
     required this.date,
-    required this.time,
     required this.cost});
 
   @override
   Widget build(BuildContext context) {
+    var appointment = DateFormat('MM-dd-yyyy @ kk:mm a').format(date);
     return Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
@@ -27,7 +27,8 @@ class ServicesReceipt extends StatelessWidget {
                 instruction: "My appointment:"
             ),
             InstructionText(
-                instruction: "${date.month}/${date.day} @ ${time.hour}:${time.minute}"
+                instruction: appointment
+                //"${date.month}/${date.day} @ ${date.hour}:${date.minute}"
             ),
             InstructionText(
                 instruction: "Total: \$$cost"

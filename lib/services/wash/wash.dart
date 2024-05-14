@@ -131,8 +131,7 @@ class _WashPageState extends State<WashPage> {
           ),
           const SizedBox(height: 30.0),
           ServicesReceipt(
-              date: selectedDate,
-              time: selectedTime,
+              date: selectedDate.copyWith(hour: selectedTime.hour, minute: selectedTime.minute),
               cost: cost
           ),
           const SizedBox(height: 25.0),
@@ -162,8 +161,9 @@ class _WashPageState extends State<WashPage> {
                             Confirmation(
                               serviceName: 'Wash',
                               services: services,
-                              date: selectedDate,
-                              time: selectedTime,
+                              date: selectedDate.copyWith(
+                                  hour: selectedTime.hour,
+                                  minute: selectedTime.minute),
                               cost: cost,
                               additionalInstructions: additionalInstructions,
                               boatDetails: boatDetails,
