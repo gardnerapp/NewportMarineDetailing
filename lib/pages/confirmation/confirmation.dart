@@ -26,30 +26,37 @@ class Confirmation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var appointmentTime = DateFormat('MM-dd-yyyy @ kk:mm a').format(date);
-    
+
     return Scaffold(
       appBar: customAppBar("Thank You !", context),
-      body: ConfirmationCard(
-          children: [
-            const SizedBox(height: 20),
-            Text(
-              "Thank you ${boatDetails['user_name']} choosing Newport Marine Detailing !\n ",
-              style: washCardStyle(),
-              textAlign: TextAlign.left
-            ),
-         //   const SizedBox(height: 20),
-            Text(
-                "A $serviceName has been booked for ${boatDetails['boat_name']} "
-                    "at ${boatDetails['boat_location']} for $appointmentTime\n ",
-                style: washCardStyle(),
-                textAlign: TextAlign.left
-            ),
-            Text(
-                "Total \$ $cost\n",
-                style: washCardStyle(),
-                textAlign: TextAlign.left
-            ),
-      ]
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const SizedBox(height: 20,),
+          const Image(image: AssetImage("lib/assets/img/full_logo.png")),
+          ConfirmationCard(
+              children: [
+                const SizedBox(height: 20),
+                Text(
+                  "Thank you ${boatDetails['user_name']} choosing Newport Marine Detailing !\n ",
+                  style: washCardStyle(),
+                  textAlign: TextAlign.left
+                ),
+             //   const SizedBox(height: 20),
+                Text(
+                    "A $serviceName has been booked for ${boatDetails['boat_name']} "
+                        "at ${boatDetails['boat_location']} for $appointmentTime\n ",
+                    style: washCardStyle(),
+                    textAlign: TextAlign.left
+                ),
+                Text(
+                    "Total \$ $cost\n",
+                    style: washCardStyle(),
+                    textAlign: TextAlign.left
+                ),
+          ]
+          ),
+        ],
       ),
     );
   }
