@@ -9,9 +9,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../styles.dart';
 import 'switch_tile.dart';
 
-// todo api call b4 push to confirm
-// todo make confirmation page look nice !
-
 class WashPage extends StatefulWidget {
   const WashPage({super.key});
 
@@ -29,6 +26,7 @@ class _WashPageState extends State<WashPage> {
 
   @override
   Widget build(BuildContext context) {
+
     getBoat();
 
     return  Scaffold(

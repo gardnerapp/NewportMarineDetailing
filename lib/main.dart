@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:newport_marine/pages/confirmation/confirmation.dart';
 import 'package:newport_marine/pages/create_boat/create_boat.dart';
+import 'package:newport_marine/services/dockside.dart';
 import 'package:newport_marine/services/full_detail.dart';
 import 'package:newport_marine/services/wash/wash.dart';
 
 import 'pages/homepage.dart';
 
 //Todo double check prices on every pages
-// TODO add button for submitting form, save locally on the phone
+// todo api call b4 push to confirm
+// TODO test full detail confirm
+// todo test APU
+// TODO add icon logo
+// todo test dockside page
+// todo create api and test email before dockside, full detailt esting 
 
 
 void main() {
@@ -74,6 +80,7 @@ class MyApp extends StatelessWidget {
         '/create_boat': (context) => const CreateBoat(),
         '/wash': (context) => const WashPage(),
         '/full_detail': (context) => const FullDetail(),
+        '/dockside': (context) => const Dockside(),
 
       },
 

@@ -23,7 +23,9 @@ class _FullDetailState extends State<FullDetail> {
 
   @override
   Widget build(BuildContext context) {
+
     getBoat();
+
     return Scaffold(
       appBar: AppBar(title: const Text("Full Detail")),
       body: ListView(

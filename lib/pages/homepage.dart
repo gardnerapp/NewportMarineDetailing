@@ -32,14 +32,18 @@ class HomePage extends StatelessWidget {
             title: "Full Detailing",
             subTitle: "Everything You Need & More !",
             icon: Icons.wb_sunny,
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, 'full_detail');
+            },
           ),
           ServiceTile(
             asset: 'lib/assets/img/dock_side.jpeg',
             title: "Dock Side",
             subTitle: "Arrival/Departure Services & Supply Restock",
             icon: Icons.thumb_up,
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, '/dockside');
+            },
           ),
         ],
       ),
