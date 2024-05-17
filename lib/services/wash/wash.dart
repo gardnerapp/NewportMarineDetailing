@@ -30,6 +30,7 @@ class _WashPageState extends State<WashPage> {
   @override
   Widget build(BuildContext context) {
     getBoat();
+
     return  Scaffold(
       appBar: AppBar(title: const Text("Wash")),
       body: ListView(
