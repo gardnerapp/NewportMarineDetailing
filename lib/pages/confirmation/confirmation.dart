@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:newport_marine/components/customAppBar.dart';
 import 'package:newport_marine/pages/confirmation/confirmation_card.dart';
+import 'package:newport_marine/services/helpers.dart';
 
 import '../../services/styles.dart';
 
@@ -25,7 +25,7 @@ class Confirmation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var appointmentTime = DateFormat('MM-dd-yyyy @ kk:mm a').format(date);
+    var appointmentTime = formatDate(date);
 
     return Scaffold(
       appBar: customAppBar("Thank You !", context),

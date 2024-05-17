@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:newport_marine/services/helpers.dart';
 import 'package:newport_marine/services/styles.dart';
 
 class ServicesReceipt extends StatelessWidget {
@@ -13,7 +13,7 @@ class ServicesReceipt extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var appointment = DateFormat('MM-dd-yyyy @ kk:mm a').format(date);
+    var appointment = formatDate(date);
     return Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
