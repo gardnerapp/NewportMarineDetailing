@@ -50,7 +50,7 @@ class _WashPageState extends State<WashPage> {
               handleTImeChange: (TimeOfDay time) => setState(() => selectedTime = time),
           ),
           const SizedBox(height: 25),
-          const Divider(height: 20.0, thickness: 2.5, color: Colors.blue,),
+          const Divider(height: 20.0, thickness: 2.5, color: Colors.blue),
           const InstructionText(instruction: "Select your options:\n"),
           SwitchTile(
               option: "Stainless Steel",
