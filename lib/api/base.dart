@@ -5,15 +5,15 @@ import 'package:newport_marine/services/helpers.dart';
 
 class API{
   // PRODUCTION https://newportmarine.app/
-  static var url = "http://localhost:3000";
-  var appointmentPath = "$url/appointments";
+  static var host = "127.0.0.1";
+  var appointmentPath = "/appointments";
 
   Map<String, String> headers = {
     "Content-Type": "application/json; charset=UTF-8"
   };
 
   Future<http.Response> createAppointment(Map<String,dynamic> boatDetails, String serviceName,
-      DateTime date, String cost, String services, String additionalInstructions
+      DateTime date, double cost, Map<String,dynamic> services, String additionalInstructions
       ) async {
 
     var body = jsonEncode({
@@ -31,7 +31,13 @@ class API{
         'additional_instructions': additionalInstructions,
       }});
 
-      http.Response response = await http.post(appointmentPath as Uri,
+      http.Response response = await http.post(
+          Uri(
+            scheme: "http",
+            port: 3000,
+            host: host,
+            path: appointmentPath
+          ),
           body: body,
           headers: headers);
       return response;

@@ -160,8 +160,8 @@ class _WashPageState extends State<WashPage> {
                           selectedDate.copyWith(
                               hour: selectedTime.hour,
                               minute: selectedTime.minute),
-                          cost as String,
-                          services as String,
+                          cost,
+                          services,
                           additionalInstructions);
                           if(req.statusCode == 200){
 
@@ -179,10 +179,10 @@ class _WashPageState extends State<WashPage> {
                                     )));
 
                           }else{
-                            Navigator.pushNamed(context, '/error_page');
+                            Navigator.pushNamed(context, '/error');
                           }
                     } on Exception catch (e){
-                      Navigator.pushNamed(context, '/error_page');
+                      Navigator.pushNamed(context, '/error');
                     }
                   }
                 }
