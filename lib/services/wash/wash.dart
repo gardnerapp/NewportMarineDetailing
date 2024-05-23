@@ -148,34 +148,42 @@ class _WashPageState extends State<WashPage> {
                 Icons.directions_boat,
                 size: 40.0,
                 color: Colors.lightBlueAccent),
-              onPressed: () {
+              onPressed: () async {
                 // make sure there is a boat
                 if(boatDetails.containsValue(null)){
                     Navigator.pushNamed(context, '/create_boat');
                 }else {
                   if (cost != 0.0) {
+                    try{
+                     var req = await API().createAppointment(boatDetails,
+                          'Wash',
+                          selectedDate.copyWith(
+                              hour: selectedTime.hour,
+                              minute: selectedTime.minute),
+                          cost as String,
+                          services as String,
+                          additionalInstructions);
+                          if(req.statusCode == 200){
 
-                    API().createAppointment(boatDetails,
-                        'Wash',
-                        selectedDate.copyWith(
-                            hour: selectedTime.hour,
-                            minute: selectedTime.minute),
-                        cost as String,
-                        services as String,
-                        additionalInstructions);
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) =>
+                                    Confirmation(
+                                      serviceName: 'Wash',
+                                      services: services,
+                                      date: selectedDate.copyWith(
+                                          hour: selectedTime.hour,
+                                          minute: selectedTime.minute),
+                                      cost: cost,
+                                      additionalInstructions: additionalInstructions,
+                                      boatDetails: boatDetails,
+                                    )));
 
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) =>
-                            Confirmation(
-                              serviceName: 'Wash',
-                              services: services,
-                              date: selectedDate.copyWith(
-                                  hour: selectedTime.hour,
-                                  minute: selectedTime.minute),
-                              cost: cost,
-                              additionalInstructions: additionalInstructions,
-                              boatDetails: boatDetails,
-                            )));
+                          }else{
+                            Navigator.pushNamed(context, '/error_page');
+                          }
+                    } on Exception catch (e){
+                      Navigator.pushNamed(context, '/error_page');
+                    }
                   }
                 }
               } )

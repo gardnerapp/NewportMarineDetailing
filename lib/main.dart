@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:newport_marine/pages/confirmation/confirmation.dart';
 import 'package:newport_marine/pages/create_boat/create_boat.dart';
+import 'package:newport_marine/pages/error_page.dart';
 import 'package:newport_marine/services/dockside.dart';
 import 'package:newport_marine/services/full_detail.dart';
 import 'package:newport_marine/services/wash/wash.dart';
@@ -81,6 +82,7 @@ class MyApp extends StatelessWidget {
         '/wash': (context) => const WashPage(),
         '/full_detail': (context) => const FullDetail(),
         '/dockside': (context) => const Dockside(),
+        '/error': (context) => const ErrorPage(),
 
       },
 
