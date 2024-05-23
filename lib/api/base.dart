@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:newport_marine/services/helpers.dart';
 
 class API{
   // PRODUCTION https://newportmarine.app/
@@ -11,21 +12,20 @@ class API{
     "Content-Type": "application/json; charset=UTF-8"
   };
 
-  Future<http.Response> createAppointment(String name, String email,
-      String phone, String boatName, int boatLength, String dock, String serviceName,
-      String time, String cost, String services, String additionalInstructions
+  Future<http.Response> createAppointment(Map<String,dynamic> boatDetails, String serviceName,
+      DateTime date, String cost, String services, String additionalInstructions
       ) async {
 
     var body = jsonEncode({
       'appointment': {
-        'name': name,
-        'email': email,
-        'phone': phone,
-        'boat_ame': boatName,
-        'boat_length': boatLength,
-        'dock': dock,
+        'name': boatDetails['user_name'],
+        'email': boatDetails['user_email'],
+        'phone': boatDetails['user_phone'],
+        'boat_name': boatDetails['boat_name'],
+        'boat_length': boatDetails['boat_length'],
+        'dock':  boatDetails['boat_location'],
         'service_name': serviceName,
-        'time': time,
+        'time': formatDate(date),
         'cost': cost,
         'services': services,
         'additional_instructions': additionalInstructions,

@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:newport_marine/components/form_submit_btn.dart';
 import 'package:newport_marine/pages/confirmation/confirmation.dart';
@@ -8,6 +6,7 @@ import 'package:newport_marine/services/services_reciept.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../styles.dart';
 import 'switch_tile.dart';
+import '../../api/base.dart';
 
 class WashPage extends StatefulWidget {
   const WashPage({super.key});
@@ -155,6 +154,16 @@ class _WashPageState extends State<WashPage> {
                     Navigator.pushNamed(context, '/create_boat');
                 }else {
                   if (cost != 0.0) {
+
+                    API().createAppointment(boatDetails,
+                        'Wash',
+                        selectedDate.copyWith(
+                            hour: selectedTime.hour,
+                            minute: selectedTime.minute),
+                        cost as String,
+                        services as String,
+                        additionalInstructions);
+
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) =>
                             Confirmation(
