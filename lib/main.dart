@@ -10,7 +10,7 @@ import 'pages/homepage.dart';
 //Todo double check prices on every pages
 // todo api call b4 push to confirm
 // TODO test full detail confirm
-// todo test APU
+// todo test API
 // TODO add icon logo
 // todo test dockside page
 // todo create api and test email before dockside, full detailt esting 
