@@ -35,6 +35,7 @@ class MyApp extends StatelessWidget {
     );
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Newport Marine Detailing',
       theme: ThemeData(
           primaryColorLight: Colors.greenAccent,

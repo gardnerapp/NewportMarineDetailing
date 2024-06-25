@@ -163,7 +163,7 @@ class _WashPageState extends State<WashPage> {
                           cost,
                           services,
                           additionalInstructions);
-                          if(req.statusCode == 200){
+                          if(req.statusCode == 202){
 
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) =>

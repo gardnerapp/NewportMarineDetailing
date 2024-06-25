@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:newport_marine/services/styles.dart';
-import 'package:numberpicker/numberpicker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../api/base.dart';
@@ -20,7 +19,9 @@ class _DocksideState extends State<Dockside> {
   TimeOfDay selectedTime = const TimeOfDay(hour: 07, minute: 00);
   double cost = 1;
   late String additionalInstructions = '';
-  Map<String,dynamic> services = {};
+  Map<String,dynamic> services = {
+
+  };
 
   Map<String,dynamic> boatDetails = {};
   @override
@@ -48,44 +49,36 @@ class _DocksideState extends State<Dockside> {
 
             const InstructionText(instruction: "Arrival/Departure Time:\n"),
 
-            const SizedBox(height: 15.0),
+            const SizedBox(height: 25.0),
 
             BookAppointment(
               handleDateChange: (DateTime date) => setState(() => selectedDate = date),
               handleTImeChange: (TimeOfDay time) => setState(() => selectedTime = time),
             ),
 
+            const SizedBox(height: 25.0),
+
             const Divider(height: 20.0, thickness: 2.5, color: Colors.blue),
 
-            const SizedBox(height: 15.0),
+            const SizedBox(height: 25.0),
 
-            const InstructionText(instruction: "Number of Deck Hands:\n"),
-
-            const SizedBox(height: 15.0),
-
-            NumberPicker(
-              value: 1,
-              minValue: 1,
-              maxValue: 10,
-              step: 10,
-              haptics: true,
-              onChanged: (val) => setState(() => services['Deck Hands'] = val as double),
+            TextFormField(
+              decoration: textInputDecoration("Number of Deck Hands?"),
+              onChanged: (val){
+                setState(() {
+                  services['Deck Hands'] = val;
+                });
+              },
             ),
+
+            const SizedBox(height: 25.0),
+
 
             TextFormField(
               decoration: textInputDecoration("Supply restock ? Please specify"),
               onChanged: (val){
                 setState(() {
                   services['Supply Restock'] = val;
-                });
-              },
-            ),
-
-            TextFormField(
-              decoration: textInputDecoration("Anything Else ?"),
-              onChanged: (val){
-                setState(() {
-                  additionalInstructions = val;
                 });
               },
             ),
@@ -100,6 +93,8 @@ class _DocksideState extends State<Dockside> {
                 });
               },
             ),
+
+            const SizedBox(height: 25.0),
 
             FormSubmitBtn(
                 label: "Dock Side",
@@ -121,7 +116,7 @@ class _DocksideState extends State<Dockside> {
                         cost,
                         services,
                         additionalInstructions);
-                        if(req.statusCode == 200){
+                        if(req.statusCode == 202){
 
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) =>
