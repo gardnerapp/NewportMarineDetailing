@@ -17,7 +17,9 @@ class ErrorPage extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(20.0),
           child: const Center(
-              child: Text("\tIf this continues to be an issue please contact our customer service\n\n https://newportmarine.app/help ",
+              child: Text("\tSorry we encountered an error.\n"
+                  "\tIf this continues to be an issue please contact our customer service\n\n "
+                  "https://newportmarineappp.xyz/help ",
                 style: TextStyle(fontSize: 30.0), textAlign: TextAlign.center,)
           )));
   }

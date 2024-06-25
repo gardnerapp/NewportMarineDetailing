@@ -33,7 +33,7 @@ class HomePage extends StatelessWidget {
             subTitle: "Everything You Need & More !",
             icon: Icons.wb_sunny,
             onTap: () {
-              Navigator.pushNamed(context, 'full_detail');
+              Navigator.pushNamed(context, '/full_detail');
             },
           ),
           ServiceTile(

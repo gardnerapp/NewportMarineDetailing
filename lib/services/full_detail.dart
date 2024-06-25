@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../components/form_submit_btn.dart';
 import '../pages/confirmation/confirmation.dart';
 import 'appointments/book_appointment.dart';
+import '../api/base.dart';
 
 class FullDetail extends StatefulWidget {
   const FullDetail({super.key});
@@ -67,7 +68,7 @@ class _FullDetailState extends State<FullDetail> {
                   Icons.directions_boat,
                   size: 40.0,
                   color: Colors.lightBlueAccent),
-              onPressed: () {
+              onPressed: () async {
                 // make sure there is a boat
                 if(boatDetails.containsValue(null)){
                   Navigator.pushNamed(context, '/create_boat');
@@ -75,18 +76,34 @@ class _FullDetailState extends State<FullDetail> {
                   setState(() {
                     cost = boatDetails['length'] * 37.0;
                   });
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) =>
-                            Confirmation(
-                              serviceName: 'Full Detail',
-                              services: services,
-                              date: selectedDate.copyWith(
-                                  hour: selectedTime.hour,
-                                  minute: selectedTime.minute),
-                              cost: cost,
-                              additionalInstructions: additionalInstructions,
-                              boatDetails: boatDetails,
-                            )));
+
+                  try{
+                   var req = await API().createAppointment(boatDetails, "Full Detail", selectedDate.copyWith(
+                        hour: selectedTime.hour,
+                        minute: selectedTime.minute), cost, services, additionalInstructions);
+
+                   if(req.statusCode == 202){
+                     Navigator.push(context,
+                         MaterialPageRoute(builder: (context) =>
+                             Confirmation(
+                               serviceName: 'Full Detail',
+                               services: services,
+                               date: selectedDate.copyWith(
+                                   hour: selectedTime.hour,
+                                   minute: selectedTime.minute),
+                               cost: cost,
+                               additionalInstructions: additionalInstructions,
+                               boatDetails: boatDetails,
+                             )));
+                   }else{
+                     Navigator.pushNamed(context, '/error');
+
+                   }
+                  }
+                  catch(e){
+                    Navigator.pushNamed(context, '/error');
+                  }
+
                   }
                 }
                )

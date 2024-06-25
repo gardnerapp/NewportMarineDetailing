@@ -15,7 +15,7 @@ class HomeDrawer extends StatelessWidget {
           const SizedBox(height: 50.0),
           Text("Please Report Any Issues to\n",
               style: Theme.of(context).textTheme.bodyMedium),
-          Text("https://newportmarine.app/help"
+          Text("https://newportmarineappp.xyz/help"
               , style: Theme.of(context).textTheme.bodyMedium)
         ],
       ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:newport_marine/pages/confirmation/confirmation.dart';
 import 'package:newport_marine/pages/create_boat/create_boat.dart';
 import 'package:newport_marine/pages/error_page.dart';
 import 'package:newport_marine/services/dockside.dart';
@@ -8,13 +7,13 @@ import 'package:newport_marine/services/wash/wash.dart';
 
 import 'pages/homepage.dart';
 
-//Todo double check prices on every pages
+//Todo put up help pg w mailer
 // todo api call b4 push to confirm
-// TODO test full detail confirm
-// todo test API
+// screenshots, upload
+//
 // TODO add icon logo
-// todo test dockside page
-// todo create api and test email before dockside, full detailt esting 
+// todo create help page
+
 
 
 void main() {
@@ -28,6 +27,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
     // Reusable appbar Icon Themes
     const appBarIconTheme =  IconThemeData(
         size: 30.0,
@@ -73,7 +73,6 @@ class MyApp extends StatelessWidget {
           elevation: 20.0,
           shadowColor: Colors.blue,
         )
-
       ),
       initialRoute: '/',
       routes: {
@@ -83,9 +82,7 @@ class MyApp extends StatelessWidget {
         '/full_detail': (context) => const FullDetail(),
         '/dockside': (context) => const Dockside(),
         '/error': (context) => const ErrorPage(),
-
       },
-
     );
   }
 }
