@@ -3,6 +3,7 @@ import 'package:newport_marine/services/styles.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../api/base.dart';
 import '../components/form_submit_btn.dart';
 import '../pages/confirmation/confirmation.dart';
 import 'appointments/book_appointment.dart';
@@ -106,24 +107,41 @@ class _DocksideState extends State<Dockside> {
                     Icons.directions_boat,
                     size: 40.0,
                     color: Colors.lightBlueAccent),
-                onPressed: () {
+                onPressed: () async {
                   // make sure there is a boat
                   if(boatDetails.containsValue(null)){
                     Navigator.pushNamed(context, '/create_boat');
                   }else {
+                    try{
+                        var req = await API().createAppointment(boatDetails,
+                        'Dock Side',
+                        selectedDate.copyWith(
+                        hour: selectedTime.hour,
+                        minute: selectedTime.minute),
+                        cost,
+                        services,
+                        additionalInstructions);
+                        if(req.statusCode == 200){
 
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) =>
-                            Confirmation(
-                              serviceName: 'Dock Side',
-                              services: services,
-                              date: selectedDate.copyWith(
-                                  hour: selectedTime.hour,
-                                  minute: selectedTime.minute),
-                              cost: cost,
-                              additionalInstructions: additionalInstructions,
-                              boatDetails: boatDetails,
-                            )));
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) =>
+                                  Confirmation(
+                                    serviceName: 'Dock Side',
+                                    services: services,
+                                    date: selectedDate.copyWith(
+                                        hour: selectedTime.hour,
+                                        minute: selectedTime.minute),
+                                    cost: cost,
+                                    additionalInstructions: additionalInstructions,
+                                    boatDetails: boatDetails,
+                                  )));
+
+                        }else{
+                          Navigator.pushNamed(context, '/error');
+                        }
+                    } on Exception catch (e){
+                      Navigator.pushNamed(context, '/error');
+                    }
                   }
                 }
             )
